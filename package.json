@@ -1,0 +1,23 @@
+{
+  "name": "bulk-domain-checker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "node --test tests/unit/*.test.js",
+    "test:browser": "npm run build && playwright test"
+  },
+  "dependencies": {
+    "tldts": "7.6.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.1",
+    "@playwright/test": "1.65.1",
+    "esbuild": "0.28.2"
+  }
+}

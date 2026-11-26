@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Find new outreach domains by comparing candidate URLs with your existing domain list.">
+    <title>Bulk Domain Checker</title>
+    <!-- build:policy -->
+    <link rel="stylesheet" href="./src/styles.css">
+  </head>
+  <body>
+    <main class="bulk-checker">
+      <header class="intro">
+        <h1>Bulk Domain Checker</h1>
+        <p>Compare a list of websites with domains you’ve already used to find new outreach opportunities.</p>
+      </header>
+
+      <form id="comparison" class="panel input-panel" autocomplete="off">
+        <div class="inputs">
+          <div class="field">
+            <label for="history">Historical / Already Used Domains</label>
+            <p id="history-help">Optional. Paste one domain or URL per line.</p>
+            <textarea id="history" aria-describedby="history-help" autocomplete="off"
+              autocapitalize="none" spellcheck="false" placeholder="example.com&#10;https://www.example.co.uk/"></textarea>
+          </div>
+          <div class="field">
+            <label for="candidates">Domains to Check</label>
+            <p id="candidates-help">Paste one candidate domain or URL per line.</p>
+            <textarea id="candidates" aria-describedby="candidates-help" autocomplete="off"
+              autocapitalize="none" spellcheck="false" placeholder="https://www.example.com/article/&#10;example.net"></textarea>
+          </div>
+        </div>
+        <div class="actions">
+          <button type="submit" class="primary">Check Domains</button>
+          <button id="clear" type="button">Clear All</button>
+        </div>
+      </form>
+      <p class="privacy">Your data stays in your browser. We do not upload, save, or store your domain lists. Download your results before leaving the page.</p>
+      <p id="feedback" class="feedback" role="status"></p>
+
+      <section id="results" class="panel results-panel" aria-labelledby="results-heading" hidden>
+        <div class="results-heading">
+          <div>
+            <h2 id="results-heading">Comparison results</h2>
+            <p>New domains are absent from the historical list you supplied.</p>
+          </div>
+          <div class="actions">
+            <button id="copy" type="button" class="primary">Copy New Domains</button>
+            <button id="download-new" type="button">Download New Domains CSV</button>
+            <button id="download-all" type="button">Download Results CSV</button>
+          </div>
+        </div>
+        <p id="export-feedback" class="feedback" role="status"></p>
+        <div id="manual-copy" class="field manual-copy" hidden>
+          <label for="copy-list">Select and copy these new domains</label>
+          <textarea id="copy-list" readonly autocomplete="off"></textarea>
+        </div>
+
+        <dl class="metrics">
+          <div><dt>Submitted entries</dt><dd id="count-total">0</dd></div>
+          <div><dt>Unique valid domains</dt><dd id="count-unique">0</dd></div>
+          <div><dt>New domains</dt><dd id="count-new">0</dd></div>
+          <div><dt>Already used</dt><dd id="count-used">0</dd></div>
+          <div><dt>Invalid entries</dt><dd id="count-invalid">0</dd></div>
+        </dl>
+
+        <div class="filters">
+          <div class="field">
+            <label for="search">Search results</label>
+            <input type="search" id="search" placeholder="Search by domain or input" autocomplete="off" maxlength="253">
+          </div>
+          <div class="field">
+            <label for="filter">Status</label>
+            <select id="filter" autocomplete="off">
+              <option value="all">All statuses</option>
+              <option value="new">New</option>
+              <option value="used">Already Used</option>
+              <option value="invalid">Invalid</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-scroll" role="region" aria-label="Domain results table" tabindex="0">
+          <table aria-label="Candidate domains">
+            <thead>
+              <tr><th scope="col">Original input</th><th scope="col">Normalized domain</th><th scope="col">Status</th></tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <p id="result-range" role="status"></p>
+          <div class="actions">
+            <button id="previous-page" type="button">Previous</button>
+            <button id="next-page" type="button">Next</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
